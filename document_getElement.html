@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="hello">안녕하세요</h1>
+    <h1 id="hi">JS 초보에요</h1>
+    <script>
+      // 문서 .(의~) id가 hello인 html 요소를 가져와라 그거의 내부 html를 안녕으로 바꿔라
+      document.getElementById("hello").innerHTML = "안녕";
+      document.getElementById("hi").innerHTML = "JS 고수에요";
+
+      // 아래 세가지를 바꾸면 원하는 것을 다 바꿀 수 있다! getElementById <- 셀렉터
+      // 왜 이렇게 코드가 긺..? -> 컴퓨터는 바보라서 하나하나 상세히 설명해줘야 댐~!
+      // document.getElementById("바꿀요소id").무엇을 = "어떻게";
+
+      document.getElementById("hello").style.color = "red";
+
+      // 숙제 폰트사이즈 16px로 줄이기
+      document.getElementById("hello").style.fontSize = "16px";
+    </script>
+  </body>
+</html>
