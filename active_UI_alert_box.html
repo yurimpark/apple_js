@@ -20,18 +20,24 @@
        3. 그냥 기본 문법 오타 (대소문자 잘못쓰기.. 등) -->
   <body>
     <div class="alert-box" id="box">
-      알림창임 <button onclick="alert('none')">닫기</button>
+      <p id="title">알림창임</p>
+      <!-- onclick -->
+      <!-- <button onclick="alert('none')">닫기</button> -->
+      <!-- addEventListener -->
+      <button id="close">닫기</button>
     </div>
 
     <!-- onclick="alert박스 보여주셈~" -->
     <button onclick=" alert('block')">열기</button>
-    <button onclick="loginAlert('아이디입력하세요')">버튼1</button>
-    <button onclick="loginAlert('비번입력하세요')">버튼2</button>
+    <button onclick="loginAlert('아이디를 입력하세요')">버튼1</button>
+    <button onclick="loginAlert('비번을 입력하세요')">버튼2</button>
 
     <script>
-      function loginAlert(parameter) {
-        document.getElementById("box").innerHTML = parameter;
-      }
+      // addEventListener
+      // 파라미터 자리에 들어가는 함수 (콜백함수) 코드를 순차적 실행할 때 가끔 보임
+      document.getElementById("close").addEventListener("click", () => {
+        document.getElementById("box").style.display = "none";
+      });
       // 더러운 코드를 깔끔하게 함수를 만들어서 고쳐보자~ (긴 코드를 짧게 축약하고 싶을 때)
       // 긴 코드 재사용이 찾을 때
 
@@ -39,6 +45,7 @@
       // parameter 작명은 자유, 여러개 가능
 
       function alert(parameter) {
+        // getElementByClassName('className')[index] 도 사용 가능한~
         document.getElementById("box").style.display = parameter;
       }
 
@@ -56,8 +63,13 @@
       }
 
       // 숙제
-      // 버튼1 누르면 아이디입력하세요
-      // 버튼2 누르면 비번입력하세요
+      // 버튼1 누르면 아이디를 입력하세요
+      // 버튼2 누르면 비번을 입력하세요
+      // 복잡하면 한글로 먼저 짜보고 코드로 옮겨보자~
+      function loginAlert(parameter) {
+        document.getElementById("title").innerHTML = parameter;
+        document.getElementById("box").style.display = "block";
+      }
     </script>
   </body>
 </html>
