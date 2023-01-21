@@ -7,36 +7,57 @@
     <title>Document</title>
     <link rel="stylesheet" href="main.css" />
   </head>
+  <!-- 교훈: 컴퓨터는 지능이 0이다.
+      구체적으로 설명해야 한다!
+      UI 만드는 법 배움!
+      UI 만드는 Step
+      1. html/css로 미리 디자인 (필요하면 숨김)
+      2. 필요할 때 보여달라고 코드 짜기(JS로) -->
+
+  <!-- 자주 겪는 에러
+       1. JS는 html아래에 코드를 짜야 잘 동작된다~
+       2. Selector 오타 주의 (콘솔 메세지 확인해서 디버깅)
+       3. 그냥 기본 문법 오타 (대소문자 잘못쓰기.. 등) -->
   <body>
-    <div class="alert-box" id="box">알림창임</div>
+    <div class="alert-box" id="box">
+      알림창임 <button onclick="alert('none')">닫기</button>
+    </div>
 
     <!-- onclick="alert박스 보여주셈~" -->
-    <button onclick="show()">열기</button>
-    <button onclick="hide()">닫기</button>
+    <button onclick=" alert('block')">열기</button>
+    <button onclick="loginAlert('아이디입력하세요')">버튼1</button>
+    <button onclick="loginAlert('비번입력하세요')">버튼2</button>
 
     <script>
+      function loginAlert(parameter) {
+        document.getElementById("box").innerHTML = parameter;
+      }
       // 더러운 코드를 깔끔하게 함수를 만들어서 고쳐보자~ (긴 코드를 짧게 축약하고 싶을 때)
       // 긴 코드 재사용이 찾을 때
 
-      function show() {
-        document.getElementById("box").style.display = "block";
+      // 함수에 구멍(parameter) 뚫기 (함수 하나로 재사용성 향상)
+      // parameter 작명은 자유, 여러개 가능
+
+      function alert(parameter) {
+        document.getElementById("box").style.display = parameter;
       }
 
-      function hide() {
-        document.getElementById("box").style.display = "none";
+      // alert('block') // 구멍 자리에 block 넣어서 실행~
+      // alert('none') // 구멍 자리에 none 넣어서 실행~
+
+      // 얘는 이제 필요 없다~
+      // function hide() {
+      //   document.getElementById("box").style.display = "none";
+      // }
+
+      // 파라미터 예시 2
+      function plus(a, b) {
+        a + b;
       }
 
-      // 자주 겪는 에러
-      // 1. JS는 html아래에 코드를 짜야 잘 동작된다~
-      // 2. Selector 오타 주의 (콘솔 메세지 확인해서 디버깅)
-      // 3. 그냥 기본 문법 오타 (대소문자 잘못쓰기.. 등)
+      // 숙제
+      // 버튼1 누르면 아이디입력하세요
+      // 버튼2 누르면 비번입력하세요
     </script>
   </body>
 </html>
-
-<!-- 교훈: 컴퓨터는 지능이 0이다.
-구체적으로 설명해야 한다!
-UI 만드는 법 배움!
-UI 만드는 Step
-1. html/css로 미리 디자인 (필요하면 숨김)
-2. 필요할 때 보여달라고 코드 짜기(JS로) -->
