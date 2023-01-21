@@ -27,7 +27,7 @@
             <input type="text" class="form-control" id="email" />
           </div>
           <div class="my-3">
-            <input type="password" class="form-control" />
+            <input type="password" class="form-control" id="password" />
           </div>
           <!--form 안에 button 주의사항! 전송은 type submit, 그 외는 button -->
           <button type="submit" class="btn btn-primary" id="send">전송</button>
@@ -72,9 +72,17 @@
     });
 
     // 전송버튼 눌렀을 때(이벤트리스너) input에 입력한 값이 공백이면 알림창 띄워주세요
-    $("form").on("submit", () => {
-      if (!document.getElementById("email").value) {
-        alert("값을 입력해주세요.");
+    $("form").on("submit", (e) => {
+      if (
+        !document.getElementById("email").value ||
+        !document.getElementById("password").value
+      ) {
+        alert("이메일과 비밀번호를 모두 입력해주세요.");
+        // 폼 전송 막기
+        e.preventDefault();
+      } else if (document.getElementById("password").value.length < 6) {
+        alert("비밀번호는 6자 이상으로 입력해주세요.");
+        e.preventDefault();
       }
     });
   </script>
