@@ -17,7 +17,8 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
+  <!-- 다크모드 버튼 눌렀을 때 진짜 다크모드로 변경하는 거 구현해보기!! -->
+  <body class="dark">
     <div class="black-bg">
       <div class="white-bg">
         <h4>로그인하세요</h4>
@@ -35,7 +36,7 @@
         </form>
       </div>
     </div>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <span class="navbar-brand">JS Shop</span>
         <span class="badge bg-dark ms-auto mx-3" id="mode">Dark Mode 🔄</span>
@@ -52,7 +53,7 @@
       <li class="list-group-item">And a fifth one</li>
     </ul>
 
-    <div class="main-bg">
+    <div class="main-bg dark">
       <h4>Shirts on Sale</h4>
       <button id="login" class="btn btn-danger">로그인</button>
     </div>
@@ -76,6 +77,15 @@
     let count = 0;
     $(".badge").on("click", function () {
       count++;
+      // jQuery 이용 한 것...
+      if (count % 2 == 1) {
+        $(".badge").html("Light Mode 🔄");
+      } else {
+        $(".badge").html("Dark Mode 🔄");
+      }
+
+      /*
+      JS로 내가 한 것...
       if (count % 2 == 0) {
         document.querySelector("#mode").addEventListener("click", function () {
           document.getElementById("mode").innerHTML = "Dark Mode 🔄";
@@ -85,6 +95,27 @@
           document.getElementById("mode").innerHTML = "Light Mode 🔄";
         });
       }
+      */
+
+      // 변수의 선언, 할당, 범위
+
+      // 선언 : let 이름
+      // 할당 : 이름 = '박유림'
+      let 이름 = "박유림";
+
+      // 재할당
+      이름 = "yurim park";
+
+      // 범위 : 함수 바깥에서 만든 변수는 함수 안에서 사용 가능
+      //       함수 안에서 변수 만들면 사용 가능 범위는 함수 내부
+      function 함수() {
+        let name = "justin";
+        console.log(name);
+      }
+
+      // var : 함수 스코프 / 재선언 O / 재할당 O
+      // let : 블록 스코프 / 재선언 X / 재할당 O
+      // const : 블록 스코프 / 재선언 X / 재할당 X (바뀌지 않는 상수에 적합)
     });
   </script>
 </html>
