@@ -73,6 +73,7 @@
 
     // 전송버튼 눌렀을 때(이벤트리스너) input에 입력한 값이 공백이면 알림창 띄워주세요
     $("form").on("submit", (e) => {
+      // 숙제 : 아이디&비번 둘 다 공백 검사
       if (
         !document.getElementById("email").value ||
         !document.getElementById("password").value
@@ -81,9 +82,24 @@
         // 폼 전송 막기
         e.preventDefault();
       } else if (document.getElementById("password").value.length < 6) {
+        // 숙제 : 비번 6자 미만 alert
         alert("비밀번호는 6자 이상으로 입력해주세요.");
         e.preventDefault();
       }
     });
+
+    // change, input 이벤트는 input에 입력한 값이 바뀌고 포커스를 잃을 때 발생
+    document.getElementById("email").addEventListener("change", function () {
+      console.log("change");
+    });
+
+    /* 
+    엄격한 비교는 ===(타입까지 같아야 함), 느슨한 비교는 ==
+
+    truthy 자료들 : 0 제외 숫자, '문자', [], {}
+    falsy 자료들 : 0, '', null, undefined, NaN
+
+    조건 2개 이상을 동시에 비교하고 싶다면, && (and) || (or) 연산자
+     */
   </script>
 </html>
