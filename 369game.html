@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>369게임, 합격판단기</title>
+  </head>
+  <body>
+    <script>
+      function 삼육구게임(num) {
+        // 어떤 숫자를 함수 안에 집어넣으면 박수를 쳐야 할 지 말아야 할 지 판단해주는 함수
+        // 박수 or 통과가 콘솔에 뜨면 된다!
+
+        // 업그레이드 버전
+        // 3의 배수에서 박수, 9의 배수에서는 두번 박수
+
+        if (num % 9 == 0) {
+          console.log("박수 박수");
+        } else if (num % 3 == 0) {
+          console.log("박수");
+        } else {
+          console.log("통과");
+        }
+      }
+
+      function 합격여부(a, b) {
+        // 공인중개사 시험은 개론, 민법 2과목
+        // 각 100점 만점이고 총합 120점 이상이면 합격
+        // 한 과목이 40점 미만이면 과락으로 불합격
+        // 합격 불합격 여부를 콘솔창에 출력하는 함수 만들기
+        if (a < 0 || a > 100 || b < 0 || b > 100) {
+          alert("올바른 숫자를 입력하세요");
+        } else if (a + b >= 120 && a > 40 && b > 40) {
+          console.log("합격");
+        } else {
+          console.log("불합격");
+        }
+      }
+
+      function 원래삼육구(number) {
+        number = number.toString();
+        let last = number.substr(-1);
+        if (last == 3 || last == 6 || last == 9) {
+          console.log("박수");
+        } else {
+          console.log("통과");
+        }
+      }
+    </script>
+  </body>
+</html>
