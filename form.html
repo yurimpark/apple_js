@@ -101,5 +101,39 @@
 
     조건 2개 이상을 동시에 비교하고 싶다면, && (and) || (or) 연산자
      */
+
+    // 문자 검사하는 가장 쉬운 방법
+    // '문자'.includes('찾을단어')
+    /* 하지만
+    - 한글이 들어있냐
+    - 영어가 들어있냐
+    - A로 끝나냐
+    - 마침표 다음에 영어가 있냐 
+    이런건 includes() 만으로 검사하기 어렵습니다.  */
+
+    // 정규표현식 ( /abc/ )
+    // [ ] 기호를 이용해서 문자 범위를 지정
+    // 시작 검사: ^  끝 검사: $
+    // + 기호를 붙여주면 반복해서 쭉 찾아달라는 뜻
+
+    $("form").on("submit", function (e) {
+      let 입력값 = document.getElementById("email").value;
+      let 비번입력값 = document.getElementById("password").value;
+
+      if (입력값 == "") {
+        alert("아이디를 입력해주세요");
+        e.preventDefault();
+      }
+      if (!/\S+@\S+.\S+/.test(입력값)) {
+        alert("이메일 형식 아님");
+        e.preventDefault();
+      }
+      // 오늘의 숙제
+      // 폼 전송시 유저가 입력한 비번에 영어 대문자가 적어도 1개 있는지 검사해봅시다.
+      if (!/[A-Z]/.test(비번입력값)) {
+        alert("비밀번호에 영어 대문자를 최소 1개 넣어주세요.");
+        e.preventDefault();
+      }
+    });
   </script>
 </html>
