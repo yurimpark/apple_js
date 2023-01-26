@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 부가세 계산기 만들기
+
+      console.log(vat(5555));
+      function vat(a) {
+        // 소수점 반올림하는법 숫자.toFixed(몇자리)
+        // 문자로 변환되니까 parseInt() or parseFloat() 해주기
+        let num = (a * 1.1).toFixed(2);
+        return parseInt(num);
+      }
+
+      // 숙제
+      // Q1. 함수에 분과 초를 차례로 파라미터로 입력하면 ms단위로 바꿔서 뱉어주는 함수
+      console.log(밀리초(1, 30)); // 90000
+      console.log(밀리초(2, 10)); // 130000
+
+      function 밀리초(min, sec) {
+        let ms = (min * 60 + sec) * 1000;
+        return ms;
+      }
+
+      // Q2. 가격을 파라미터로 입력하면 10% 할인가를 뱉는 함수
+      // 첫 구매여부도 true/false로 둘째파라미터에 입력
+      // 첫 구매가 맞을 경우 추가로 1.5 달러도 할인
+      console.log(할인(70, false)); // 63
+      console.log(할인(10, true)); // 7.5
+      console.log(할인(10.3, true)); // 7.5
+
+      function 할인(가격, 첫구매) {
+        if (첫구매 == true) {
+          가격 = (가격 * 0.9 - 1.5).toFixed(3);
+        } else 가격 = (가격 * 0.9).toFixed(3);
+        return parseFloat(가격);
+      }
+    </script>
+  </body>
+</html>
