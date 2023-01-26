@@ -16,3 +16,23 @@ window.scrollBy(x, y)
 $(window).on('scroll', function(){
   $(window).scrollTop();
 })
+
+# 스크롤 다룰 때 주의점
+
+스크롤이벤트리스너 안의 코드는 1초에 60번 이상 실행된다.
+그래서 스크롤 이벤트리스너는 많이 달면 성능저하가 일어나니 스크롤바 1개마다 1개만 쓰자! 
+
+
+1. 웹페이지 scrollHeight 구할 땐 브라우저마다 오차가 있을 수 있어서 테스트해보는게 좋다.
+2. 웹페이지 scrollHeight 구하는 코드는 페이지 로드가 완료되고나서 실행해야 정확하다.
+   그래서 <body> 끝나기 전에 적는게 좋다.
+
+# 오늘의 교훈
+
+1. 스크롤바 조작할 때 마다 코드실행가능하구나
+2. 박스의 숨겨진 실제 높이도 구할 수 있구나
+3. 스크롤내린 양도 구할 수 있군
+
+// 현재 스크롤 길이를 퍼센테이지로 나타내는 내장함수
+let scrollDepth =
+((window.scrollY + window.innerHeight) / document.body.scrollHeight) *100;
