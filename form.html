@@ -18,6 +18,16 @@
     ></script>
   </head>
   <body>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Success example"
+      aria-valuenow="25"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div class="progress-bar bg-success" style="width: 0%"></div>
+    </div>
     <div class="black-bg">
       <div class="white-bg">
         <h4>로그인하세요</h4>
@@ -43,6 +53,7 @@
         </button>
       </div>
     </nav>
+
     <ul class="list-group">
       <li class="list-group-item">An item</li>
       <li class="list-group-item">A second item</li>
@@ -50,7 +61,6 @@
       <li class="list-group-item">A fourth item</li>
       <li class="list-group-item">And a fifth one</li>
     </ul>
-
     <div class="main-bg">
       <h4>Shirts on Sale</h4>
       <button id="login" class="btn btn-danger">로그인</button>
@@ -83,31 +93,43 @@
       asperiores? Unde.
     </div>
 
-    <div style="height: 1000px"></div>
+    <div style="height: 2000px"></div>
 
     <script>
       // 오늘의 숙제 :
       // 1. 스크롤바를 100px 내리면 로고 폰트사이즈를 작게 만들어오십시오.
       // 반대로 100px 미만으로 내리면 로고 폰트사이즈를 크게 만들어옵시다.
       // 2. 회원약관 박스를 거의 끝까지 스크롤하면 alert를 띄워줍시다.
+
+      // 현재 페이지가 실행 될 때마다 (스크롤 이벤트리스너)
       $(window).on("scroll", function () {
+        // 내부 코드 실행
         if (window.scrollY >= 100) {
           $(".navbar-brand").css("font-size", "20px");
-        }
-        if (window.scrollY < 100) {
+        } else {
           $(".navbar-brand").css("font-size", "30px");
         }
       });
 
       // div의 스크롤바 내린 양 + 눈에 보이는 div높이 == div의 실제 높이일 경우 alert()
       $(".lorem").on("scroll", function () {
-        let 스크롤양 = document.querySelector(".lorem").scrollTop;
-        let 실제높이 = document.querySelector(".lorem").scrollHeight;
-        let 높이 = document.querySelector(".lorem").clientHeight;
+        let 스크롤양 = document.querySelector(".lorem").scrollTop; //현재 웹페이지 스크롤양
+        let 실제높이 = document.querySelector(".lorem").scrollHeight; //현재 웹페이지 실제높이
+        let 높이 = document.querySelector(".lorem").clientHeight; //현재 웹페이지 보이는 높이
         if (Math.round(스크롤양) + 높이 == 실제높이) {
           alert("다 읽었습니다");
         }
         console.log(스크롤양, 실제높이, 높이);
+      });
+
+      // 응용문제 : 페이지 진척도 알려주는 UI 만들어보기
+      $(window).on("scroll", function () {
+        // 현재 스크롤 길이를 퍼센테이지로 나타내는 내장함수
+        let scrollDepth =
+          ((window.scrollY + window.innerHeight) / document.body.scrollHeight) *
+          100;
+        console.log("scrollDepth", scrollDepth);
+        $(".progress-bar").css("width", scrollDepth + "%");
       });
     </script>
 
