@@ -62,3 +62,15 @@
 .slide-box img {
   width: 100%;
 }
+
+.navbar {
+  /* 내브바 상단 고정 + 가로맞춤 */
+  position: fixed;
+  width: 100%;
+  /* 혹시 모르니 z-index 넣어줌 */
+  z-index: 5;
+}
+
+.navbar-brand {
+  font-size: 30px;
+}

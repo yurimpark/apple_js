@@ -37,7 +37,7 @@
     </div>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand">Navbar</span>
+        <span class="navbar-brand">JS Shop</span>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -75,6 +75,57 @@
     <button class="slide-2">2</button>
     <button class="slide-3">3</button>
     <button class="next">다음</button>
+
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita veniam
+      odit necessitatibus, aliquam est voluptatibus doloribus ipsum impedit nemo
+      corrupti sapiente eum repellendus illum cumque quod aliquid animi
+      asperiores? Unde.
+    </div>
+
+    <div style="height: 1000px"></div>
+
+    <script>
+      // 오늘의 숙제 :
+      // 1. 스크롤바를 100px 내리면 로고 폰트사이즈를 작게 만들어오십시오.
+      // 반대로 100px 미만으로 내리면 로고 폰트사이즈를 크게 만들어옵시다.
+      // 2. 회원약관 박스를 거의 끝까지 스크롤하면 alert를 띄워줍시다.
+      $(window).on("scroll", function () {
+        if (window.scrollY >= 100) {
+          $(".navbar-brand").css("font-size", "20px");
+        }
+        if (window.scrollY < 100) {
+          $(".navbar-brand").css("font-size", "30px");
+        }
+      });
+
+      // div의 스크롤바 내린 양 + 눈에 보이는 div높이 == div의 실제 높이일 경우 alert()
+      $(".lorem").on("scroll", function () {
+        let 스크롤양 = document.querySelector(".lorem").scrollTop;
+        let 실제높이 = document.querySelector(".lorem").scrollHeight;
+        let 높이 = document.querySelector(".lorem").clientHeight;
+        if (Math.round(스크롤양) + 높이 == 실제높이) {
+          alert("다 읽었습니다");
+        }
+        console.log(스크롤양, 실제높이, 높이);
+      });
+    </script>
+
+    <script>
+      window.addEventListener("scroll", function () {
+        // 스크롤바를 얼만큼 내렸는지
+        // console.log(window.scrollY);
+        // 강제로 스크롤하기
+        // window.scrollTo(0, 400);
+        // 현재 위치부터 강제로 스크롤하기
+        // window.scrollBy(0, 400);
+      });
+
+      $(window).on("scroll", function () {
+        // 현재 스크롤바 위치 출력
+        console.log($(window).scrollTop());
+      });
+    </script>
 
     <script>
       // 오늘의 숙제
