@@ -91,6 +91,7 @@
         $(".slide-container").css("transform", "translateX(-200vw)");
         지금사진 = 3;
       });
+
       // 다음사진보기 & 이전사진보기 버튼과 기능도 만들어보기
       // 다음 버튼 누르면 지금 보이는 사진이 1이면 2번, 2이면 3번, 3이면 1번 보여주세요
       let 지금사진 = 1;
@@ -105,6 +106,7 @@
       //   }
       // });
 
+      // 위의 긴 코드를 아래처럼 쓸 수 있음
       $(".next").on("click", function () {
         $(".slide-container").css(
           "transform",
