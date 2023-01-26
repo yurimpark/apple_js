@@ -17,9 +17,33 @@ for (let i = 0; i < $(".tab-button").length; i++) {
   $(".tab-button")
     .eq(i)
     .on("click", function () {
-      $(".tab-button").removeClass("orange");
-      $(".tab-button").eq(i).addClass("orange");
-      $(".tab-content").removeClass("show");
-      $(".tab-content").eq(i).addClass("show");
+      탭열기(i);
     });
+}
+
+// 이벤트 버블링을 이용해서 이벤트 리스너 1개만 쓰기
+$(".list").click(function (e) {
+  // dataset 이용해서 코드 줄이기
+  탭열기(e.target.dataset.id);
+  console.log(e.target.dataset.id);
+
+  // 지금 누른게 버튼 0이면 탭열기(0)
+  // if (e.target == document.querySelectorAll(".tab-button")[0]) {
+  //   탭열기(0);
+  // }
+  // 지금 누른게 버튼 1이면 탭열기(1)
+  // if (e.target == document.querySelectorAll(".tab-button")[1]) {
+  //   탭열기(1);
+  // }
+  // 지금 누른게 버튼 2이면 탭열기(2)
+  // if (e.target == document.querySelectorAll(".tab-button")[2]) {
+  //   탭열기(2);}
+});
+
+// 전에 만들었던 탭기능 함수로 축약
+function 탭열기(숫자) {
+  $(".tab-button").removeClass("orange");
+  $(".tab-button").eq(숫자).addClass("orange");
+  $(".tab-content").removeClass("show");
+  $(".tab-content").eq(숫자).addClass("show");
 }
