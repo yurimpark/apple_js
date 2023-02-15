@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container mt-5">
-      <div class="card p-3">상품명 / 가격</div>
+      <div class="card p-3"><span class="car">상품명 / 가격</span></div>
     </div>
   </body>
 
@@ -23,5 +23,8 @@
     console.log(car);
     console.log(car.slice(1, 3));
     console.log(car2.price);
+
+    // 숙제 : 데이터를 html에 띄워보기
+    document.querySelector(".car").innerHTML = car2.name + " / " + car2.price;
   </script>
 </html>
