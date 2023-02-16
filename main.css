@@ -81,3 +81,7 @@
   position: fixed;
   width: 100%;
 }
+
+.form-hide {
+  display: none;
+}
