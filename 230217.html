@@ -31,6 +31,7 @@
       <select class="form-select mt-2">
         <option>모자</option>
         <option>셔츠</option>
+        <option>바지</option>
       </select>
       <select class="form-select mt-2 form-hide">
         <option>95</option>
@@ -38,15 +39,43 @@
       </select>
     </form>
 
+    <div id="test"></div>
+
     <script>
+      // 자바스크립트로 html 생성법 1  * createElement()
+      // var a = document.createElement("p");
+      // a.innerHTML = "안녕";
+      // document.querySelector("#test").appendChild(a);
+
+      // 자바스크립트로 html 생성법 2  * insertAdjacentHTML()
+      // var 템플릿 = "<p>하하</p>";
+      // document.querySelector("#test").insertAdjacentHTML("beforeend", 템플릿);
+
+      // 제이쿼리 문법  * append()
+      // $("#test").append(템플릿);
+
       $(".form-select")
         .eq(0)
-        .on("input", function (e) {
+        .on("input", function () {
           var value = $(".form-select").eq(0).val();
           if (value == "셔츠") {
             $(".form-select").eq(1).removeClass("form-hide");
           }
+          // 바지를 선택했을 때, 사이즈 보여주기
+          if (value == "바지") {
+            $(".form-select").eq(1).removeClass("form-hide");
+            $(".form-select").eq(1).html("");
+            var 템플릿 = `<option>28</option><option>30</option>`;
+            $(".form-select").eq(1).append(템플릿);
+          } else if (value == "셔츠") {
+            $(".form-select").eq(1).removeClass("form-hide");
+            $(".form-select").eq(1).html("");
+            var 템플릿2 = `<option>95</option><option>100</option>`;
+            $(".form-select").eq(1).append(템플릿2);
+          }
         });
+
+      // 셔츠에서 다시 모자를 선택했을 때, 사이즈 영역 가리기
       $(".form-select")
         .eq(0)
         .on("input", function () {
