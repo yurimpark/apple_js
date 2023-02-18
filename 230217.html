@@ -54,24 +54,27 @@
       // 제이쿼리 문법  * append()
       // $("#test").append(템플릿);
 
+      var pants = [28, 30, 32];
+      var shirts = [90, 95, 100];
+      var formSize = $(".form-select").eq(1);
+
       $(".form-select")
         .eq(0)
         .on("input", function () {
           var value = $(".form-select").eq(0).val();
-          if (value == "셔츠") {
-            $(".form-select").eq(1).removeClass("form-hide");
-          }
-          // 바지를 선택했을 때, 사이즈 보여주기
+          // 바지와 셔츠를 선택했을 때, 사이즈 보여주기
           if (value == "바지") {
-            $(".form-select").eq(1).removeClass("form-hide");
-            $(".form-select").eq(1).html("");
-            var 템플릿 = `<option>28</option><option>30</option>`;
-            $(".form-select").eq(1).append(템플릿);
+            formSize.removeClass("form-hide");
+            formSize.html("");
+            pants.forEach(function (item) {
+              formSize.append(`<option>${item}</option>`);
+            });
           } else if (value == "셔츠") {
-            $(".form-select").eq(1).removeClass("form-hide");
-            $(".form-select").eq(1).html("");
-            var 템플릿2 = `<option>95</option><option>100</option>`;
-            $(".form-select").eq(1).append(템플릿2);
+            formSize.removeClass("form-hide");
+            formSize.html("");
+            shirts.forEach(function (items) {
+              formSize.append(`<option>${items}</option>`);
+            });
           }
         });
 
@@ -81,7 +84,7 @@
         .on("input", function () {
           var value = $(".form-select").eq(0).val();
           if (value == "모자") {
-            $(".form-select").eq(1).addClass("form-hide");
+            formSize.addClass("form-hide");
           }
         });
     </script>
