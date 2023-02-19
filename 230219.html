@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-sm-4">
+          <img src="https://via.placeholder.com/600" class="w-100" />
+          <h5>Card title</h5>
+          <p>가격 : 70000</p>
+        </div> -->
+      </div>
+      <button class="btn btn-danger">더보기</button>
+    </div>
+    <!-- 오늘의 숙제 : 
+    list.html로 돌아가서 상품목록 3개 만들었던 html 코드는 싹 지우고
+    자바스크립트 코드짜서 상품목록 3개를 동적으로 생성해오십시오 
+    var products 안에 있던 데이터도 html에 잘 표기되어있어야합니다.  -->
+    <script>
+      var products = [
+        { id: 0, price: 70000, title: "Blossom Dress" },
+        { id: 1, price: 50000, title: "Springfield Shirt" },
+        { id: 2, price: 60000, title: "Black Monastery" },
+      ];
+      // for문으로 만들기
+      // for (let i = 0; i < products.length; i++) {
+      //   var 템플릿 = `<div class="col-sm-4">
+      //       <img src="https://via.placeholder.com/600" class="w-100" />
+      //       <h5>${products[i].title}</h5>
+      //       <p>가격 : ${products[i].price}</p>
+      //     </div>`;
+      //   document.querySelector(".row").insertAdjacentHTML("beforeend", 템플릿);
+      // }
+
+      // forEach문으로 만들기
+      products.forEach(i => {
+        var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+        document.querySelector(".row").insertAdjacentHTML("beforeend", 템플릿);
+      });
+
+      // 더보기 버튼 누르면 상품 3개 가져와서 출력하기
+      var btn = document.querySelector(".btn");
+      btn.addEventListener("click", function () {
+        fetch("https://codingapple1.github.io/js/more1.json")
+          .then(res => res.json())
+          .then(data => {
+            // for문으로 만들기
+            // for (let item = 0; item < data.length; item++) {
+            //   var 템플릿2 = `<div class="col-sm-4">
+            //   <img src="https://via.placeholder.com/600" class="w-100" />
+            //   <h5>${data[item].title}</h5>
+            //   <p>가격 : ${data[item].price}</p>
+            // </div>`;
+            //   document
+            //     .querySelector(".row")
+            //     .insertAdjacentHTML("beforeend", 템플릿2);
+            // }
+
+            // forEach문으로 만들기
+            data.forEach(i => {
+              var 템플릿2 = `<div class="col-sm-4">
+              <img src="https://via.placeholder.com/600" class="w-100" />
+              <h5>${i.title}</h5>
+              <p>가격 : ${i.price}</p>
+            </div>`;
+              document
+                .querySelector(".row")
+                .insertAdjacentHTML("beforeend", 템플릿2);
+            });
+          });
+      });
+    </script>
+  </body>
+</html>
