@@ -29,6 +29,7 @@
         </div> -->
       </div>
       <button class="btn btn-danger">더보기</button>
+      <button class="btn btn-primary" id="price">가격순정렬</button>
     </div>
     <!-- 오늘의 숙제 : 
     list.html로 돌아가서 상품목록 3개 만들었던 html 코드는 싹 지우고
@@ -40,6 +41,19 @@
         { id: 1, price: 50000, title: "Springfield Shirt" },
         { id: 2, price: 60000, title: "Black Monastery" },
       ];
+
+      var 어레이 = [7, 3, 5, 2, 40, -40];
+      var 어레이2 = ["a", "b", "c"];
+      var 어레이3 = ["가", "나", "다"];
+      어레이.sort(function (a, b) {
+        return a - b;
+      });
+      어레이2.sort().reverse();
+      어레이3.sort().reverse();
+      console.log(어레이);
+      console.log(어레이2);
+      console.log(어레이3);
+
       // for문으로 만들기
       // for (let i = 0; i < products.length; i++) {
       //   var 템플릿 = `<div class="col-sm-4">
@@ -61,9 +75,14 @@
       });
 
       // 더보기 버튼 누르면 상품 3개 가져와서 출력하기
+
+      // 응용문제:
+      // 1. 더보기버튼을 2번째 누르면 7,8,9번째 상품을 더 가져와서 html로 보여주기
+
       var btn = document.querySelector(".btn");
+      var clickCount = 1;
       btn.addEventListener("click", function () {
-        fetch("https://codingapple1.github.io/js/more1.json")
+        fetch(`https://codingapple1.github.io/js/more${clickCount}.json`)
           .then(res => res.json())
           .then(data => {
             // for문으로 만들기
@@ -80,16 +99,45 @@
 
             // forEach문으로 만들기
             data.forEach(i => {
-              var 템플릿2 = `<div class="col-sm-4">
+              var 템플릿 = `<div class="col-sm-4">
               <img src="https://via.placeholder.com/600" class="w-100" />
               <h5>${i.title}</h5>
               <p>가격 : ${i.price}</p>
             </div>`;
               document
                 .querySelector(".row")
-                .insertAdjacentHTML("beforeend", 템플릿2);
+                .insertAdjacentHTML("beforeend", 템플릿);
             });
+            clickCount++;
+            console.log(clickCount);
           });
+
+        // 2. 10,11,12번 상품은 없으니 버튼 숨기기
+        if (clickCount === 2) {
+          btn.style.display = "none";
+        }
+      });
+
+      // 버튼을 누르면 products 안의 데이터를 가격순으로 정렬
+      var btn2 = document.querySelector("#price");
+      var result;
+      btn2.addEventListener("click", function () {
+        result = products.sort(function (a, b) {
+          return a.price - b.price;
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result.forEach(i => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
       });
     </script>
   </body>
