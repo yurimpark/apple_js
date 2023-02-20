@@ -30,6 +30,8 @@
       </div>
       <button class="btn btn-danger">더보기</button>
       <button class="btn btn-primary" id="price">가격순정렬</button>
+      <button class="btn btn-primary" id="reverse">상품명 역순정렬</button>
+      <button class="btn btn-primary" id="filter">6만원 이하 상품 보기</button>
     </div>
     <!-- 오늘의 숙제 : 
     list.html로 돌아가서 상품목록 3개 만들었던 html 코드는 싹 지우고
@@ -65,7 +67,7 @@
       // }
 
       // forEach문으로 만들기
-      products.forEach(i => {
+      products.forEach((i) => {
         var 템플릿 = `<div class="col-sm-4">
             <img src="https://via.placeholder.com/600" class="w-100" />
             <h5>${i.title}</h5>
@@ -83,8 +85,8 @@
       var clickCount = 1;
       btn.addEventListener("click", function () {
         fetch(`https://codingapple1.github.io/js/more${clickCount}.json`)
-          .then(res => res.json())
-          .then(data => {
+          .then((res) => res.json())
+          .then((data) => {
             // for문으로 만들기
             // for (let item = 0; item < data.length; item++) {
             //   var 템플릿2 = `<div class="col-sm-4">
@@ -98,7 +100,7 @@
             // }
 
             // forEach문으로 만들기
-            data.forEach(i => {
+            data.forEach((i) => {
               var 템플릿 = `<div class="col-sm-4">
               <img src="https://via.placeholder.com/600" class="w-100" />
               <h5>${i.title}</h5>
@@ -128,7 +130,55 @@
 
         document.querySelector(".row").innerHTML = "";
 
-        result.forEach(i => {
+        result.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 데이터를 상품명 역순으로 정렬
+      var btn3 = document.querySelector("#reverse");
+      var result2;
+      btn3.addEventListener("click", function () {
+        result2 = products.sort(function (a, b) {
+          if (a.title < b.title) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result2.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 6만원 이하 상품보여주기
+      var btn4 = document.querySelector("#filter");
+      var result3;
+      btn4.addEventListener("click", function () {
+        result3 = products.filter(function (a) {
+          return a.price <= 60000;
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result3.forEach((i) => {
           var 템플릿 = `<div class="col-sm-4">
             <img src="https://via.placeholder.com/600" class="w-100" />
             <h5>${i.title}</h5>
