@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container" style="padding-top: 40px">
+      <div class="row">
+        <!-- <div class="col-sm-4">
+          <img src="https://via.placeholder.com/600" class="w-100" />
+          <h5>Card title</h5>
+          <p>가격 : 70000</p>
+        </div> -->
+      </div>
+      <button class="btn btn-danger">더보기</button>
+      <button class="btn btn-primary" id="price">가격순정렬</button>
+      <button class="btn btn-primary" id="sort">상품명순정렬</button>
+      <button class="btn btn-primary" id="reverse">상품명역순정렬</button>
+      <button class="btn btn-primary" id="filter">6만원 이하 상품</button>
+      <button class="btn btn-danger" id="back">순서 되돌리기</button>
+    </div>
+    <!-- 오늘의 숙제 : 
+    list.html로 돌아가서 상품목록 3개 만들었던 html 코드는 싹 지우고
+    자바스크립트 코드짜서 상품목록 3개를 동적으로 생성해오십시오 
+    var products 안에 있던 데이터도 html에 잘 표기되어있어야합니다.  -->
+    <script>
+      var products = [
+        { id: 0, price: 70000, title: "Blossom Dress" },
+        { id: 1, price: 50000, title: "Springfield Shirt" },
+        { id: 2, price: 60000, title: "Black Monastery" },
+      ];
+
+      var 변수 = 0;
+
+      products.forEach((a, i) => {
+        var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${products[i].title}</h5>
+            <p>가격 : ${products[i].price}</p>
+            <button class="buy">구매</button>
+          </div>`;
+        document.querySelector(".row").insertAdjacentHTML("beforeend", 템플릿);
+      });
+
+      // 로컬스토리지 다루는 법
+      localStorage.setItem("이름", "yurim");
+      localStorage.getItem("이름");
+      localStorage.removeItem("이름");
+
+      // 로컬스토리지에 array/object 저장
+      var arr = [1, 2, 3];
+      var newArr = JSON.stringify(arr);
+      localStorage.setItem("num", newArr);
+
+      //꺼내서 쓸 땐
+      var 꺼낸거 = localStorage.getItem("num");
+      꺼낸거 = JSON.parse(꺼낸거);
+      console.log(꺼낸거);
+
+      // 더보기 버튼 누르면 상품 3개 가져와서 출력하기
+
+      // 응용문제:
+      // 1. 더보기버튼을 2번째 누르면 7,8,9번째 상품을 더 가져와서 html로 보여주기
+
+      var btn = document.querySelector(".btn");
+      var clickCount = 1;
+      btn.addEventListener("click", function () {
+        fetch(`https://codingapple1.github.io/js/more${clickCount}.json`)
+          .then((res) => res.json())
+          .then((data) => {
+            data.forEach((i) => {
+              var 템플릿 = `<div class="col-sm-4">
+              <img src="https://via.placeholder.com/600" class="w-100" />
+              <h5>${i.title}</h5>
+              <p>가격 : ${i.price}</p>
+            </div>`;
+              document
+                .querySelector(".row")
+                .insertAdjacentHTML("beforeend", 템플릿);
+            });
+            clickCount++;
+            console.log(clickCount);
+          });
+
+        // 2. 10,11,12번 상품은 없으니 버튼 숨기기
+        if (clickCount === 2) {
+          btn.style.display = "none";
+        }
+      });
+
+      // 버튼을 누르면 products 안의 데이터를 가격순으로 정렬
+      var btn2 = document.querySelector("#price");
+      var result;
+      btn2.addEventListener("click", function () {
+        result = products.sort(function (a, b) {
+          return a.price - b.price;
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 데이터를 상품명 역순으로 정렬
+      var btn3 = document.querySelector("#reverse");
+      var result2;
+      btn3.addEventListener("click", function () {
+        result2 = products.sort(function (a, b) {
+          if (a.title < b.title) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result2.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 6만원 이하 상품보여주기
+      var btn4 = document.querySelector("#filter");
+      var result3;
+      btn4.addEventListener("click", function () {
+        result3 = products.filter(function (a) {
+          return a.price <= 60000;
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result3.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 데이터를 상품명순으로 정렬
+      var btn5 = document.querySelector("#sort");
+      var result4;
+      btn5.addEventListener("click", function () {
+        result4 = products.sort(function (a, b) {
+          if (a.title < b.title) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result4.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 순서 되돌리기
+      var btn6 = document.querySelector("#back");
+      var result5;
+      btn6.addEventListener("click", function () {
+        result5 = products;
+        document.querySelector(".row").innerHTML = "";
+
+        result5.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+    </script>
+  </body>
+</html>
