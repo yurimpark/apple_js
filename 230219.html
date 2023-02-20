@@ -30,8 +30,10 @@
       </div>
       <button class="btn btn-danger">더보기</button>
       <button class="btn btn-primary" id="price">가격순정렬</button>
-      <button class="btn btn-primary" id="reverse">상품명 역순정렬</button>
-      <button class="btn btn-primary" id="filter">6만원 이하 상품 보기</button>
+      <button class="btn btn-primary" id="sort">상품명순정렬</button>
+      <button class="btn btn-primary" id="reverse">상품명역순정렬</button>
+      <button class="btn btn-primary" id="filter">6만원 이하 상품</button>
+      <button class="btn btn-danger" id="back">순서 되돌리기</button>
     </div>
     <!-- 오늘의 숙제 : 
     list.html로 돌아가서 상품목록 3개 만들었던 html 코드는 싹 지우고
@@ -179,6 +181,51 @@
         document.querySelector(".row").innerHTML = "";
 
         result3.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 데이터를 상품명순으로 정렬
+      var btn5 = document.querySelector("#sort");
+      var result4;
+      btn5.addEventListener("click", function () {
+        result4 = products.sort(function (a, b) {
+          if (a.title < b.title) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+
+        document.querySelector(".row").innerHTML = "";
+
+        result4.forEach((i) => {
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${i.title}</h5>
+            <p>가격 : ${i.price}</p>
+          </div>`;
+          document
+            .querySelector(".row")
+            .insertAdjacentHTML("beforeend", 템플릿);
+        });
+      });
+
+      // 버튼을 누르면 순서 되돌리기
+      var btn6 = document.querySelector("#back");
+      var result5;
+      btn6.addEventListener("click", function () {
+        result5 = products;
+        document.querySelector(".row").innerHTML = "";
+
+        result5.forEach((i) => {
           var 템플릿 = `<div class="col-sm-4">
             <img src="https://via.placeholder.com/600" class="w-100" />
             <h5>${i.title}</h5>
