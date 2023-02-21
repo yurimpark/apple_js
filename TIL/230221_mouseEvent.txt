@@ -1,0 +1,15 @@
+# mouse 이벤트 3개
+마우스로 어떤 html 요소를 조작할 때 발동하는 이벤트
+1. mousedown (어떤 요소에 마우스버튼 눌렀을 때)
+2. mouseup (어떤 요소에 마우스버튼 뗐을 때)
+3. mousemove (어떤 요소 위에서 마우스 이동할 때)
+
+
+<script>
+  $('.slide-box').eq(0).on('mousemove', function(e){
+    console.log(e.clientX)
+  })
+</script>
+
+mouse~~~ 이벤트리스너안에선 e.clientX e.clientY를 출력해볼 수 있는데,
+현재 마우스 좌표를 알려준다. (유저가 얼마나 사진을 드래그 했는지 알 수 있음)
