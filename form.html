@@ -125,6 +125,58 @@
         .eq(0)
         .on("mouseup", function (e) {
           눌렀냐 = false;
+          if (e.clientX - 시작좌표 < -100) {
+            $(".slide-container")
+              .css("transition", "all 0.5s")
+              .css("transform", "translateX(-100vw)");
+          } else {
+            $(".slide-container")
+              .css("transition", "all 0.5s")
+              .css("transform", "translateX(0vw)");
+          }
+          setTimeout(() => {
+            $(".slide-container").css("transition", "none");
+          }, 500);
+        });
+
+      // 모바일은 터치 이벤트리스너 달아야함
+      $(".slide-box")
+        .eq(0)
+        .on("touchstart", function (e) {
+          시작좌표 = e.touches[0].clientX;
+          눌렀냐 = true;
+        });
+
+      $(".slide-box")
+        .eq(0)
+        .on("touchmove", function (e) {
+          console.log(e.touches[0].clientX - 시작좌표);
+          // 클릭하지 않았을 때 움직임 방지
+          if (눌렀냐 == true) {
+            $(".slide-container").css(
+              "transform",
+              `translate(${e.touches[0].clientX - 시작좌표}px)`
+            );
+          }
+        });
+
+      // 마우스 뗐을 때 움직임 방지
+      $(".slide-box")
+        .eq(0)
+        .on("touchend", function (e) {
+          눌렀냐 = false;
+          if (e.changedTouches[0].clientX - 시작좌표 < -100) {
+            $(".slide-container")
+              .css("transition", "all 0.5s")
+              .css("transform", "translateX(-100vw)");
+          } else {
+            $(".slide-container")
+              .css("transition", "all 0.5s")
+              .css("transform", "translateX(0vw)");
+          }
+          setTimeout(() => {
+            $(".slide-container").css("transition", "none");
+          }, 500);
         });
 
       // e.target() 이용해서 이벤트 버블링 방지
