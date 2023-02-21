@@ -1,0 +1,43 @@
+
+# 브라우저 저장공간 (크롬 개발자도구의 Application 탭)
+
+Local Storage / Session Storage (key : value 형태로 문자, 숫자 데이터 저장가능)
+Indexed DB (크고 많은 구조화된 데이터를 DB처럼 저장가능, 문법더러움)
+Cookies (유저 로그인정보 저장공간)
+Cache Storage (html css js img 파일 저장해두는 공간)
+
+Local Storage / Session Storage
+1. 문자, 숫자만 key : value 형태로 저장가능
+2. 5MB까지만 저장가능
+3. Local Storage는 브라우저 재접속해도 영구적으로 남아있음
+4. Session Storage는 브라우저 끄면 사라짐
+
+
+# 로컬스토리지 사용법
+localStorage.setItem('이름', 'kim') //자료저장하는법
+localStorage.getItem('이름') //자료꺼내는법
+localStorage.removeItem('이름') //자료삭제하는법
+
+sessionStorage.~~~로 바꾸면 Session Storage에 저장가능
+
+
+# 로컬스토리지에 array/object 저장하려면
+
+array/object를 로컬스토리지에 저장하면 강제로 문자로 바꿔서 저장된다.
+=> JSON으로 바꾸면 문자취급을 받기 때문에 안전하게 로컬스토리지에 저장할 수 있다.
+
+var arr = [1,2,3];
+var newArr = JSON.stringify(arr);
+localStorage.setItem('num', newArr)
+
+꺼낸걸 다시 array/object로 바꾸고 싶으면 
+JSON.parse() 안에 넣으면 된다.
+
+//꺼내서 쓸 때
+var 꺼낸거 = localStorage.getItem('num');
+꺼낸거 = JSON.parse(꺼낸거);
+console.log(꺼낸거);
+
+결론: 
+array/object -> JSON 변환하고 싶으면 JSON.stringify()
+JSON -> array/object 변환하고 싶으면 JSON.parse()
